@@ -1,4 +1,4 @@
-project "GLFW"
+project "glfw"
 	kind "StaticLib"
 	language "C"
 
@@ -6,47 +6,51 @@ project "GLFW"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
-	{
-		"include/GLFW/glfw3.h",
-		"include/GLFW/glfw3native.h",
-		"src/glfw_config.h",
-		"src/context.c",
-		"src/init.c",
-		"src/input.c",
-		"src/monitor.c",
-		"src/vulkan.c",
-		"src/window.c",
-		"src/platform.c",
-		"platform.h",
-		"internal.h",
-		"win32_module.c",
-		"null_platform.h",
-		"null_init.c",
-		"null_monitor.c",
-		"null_window.c",
-		"null_joystick.c",
-		"null_joystick.h",
+		{"include/GLFW/glfw3.h"
+		,"include/GLFW/glfw3native.h"
+		,"src/glfw_config.h"
+		,"src/context.c"
+		,"src/init.c"
+		,"src/input.c"
+		,"src/monitor.c"
+		,"src/vulkan.c"
+		,"src/window.c"
+		,"src/platform.c"
+		,"src/platform.h"
+		,"src/internal.h"
+		,"src/win32_module.c"
+		,"src/null_platform.h"
+		,"src/null_init.c"
+		,"src/null_monitor.c"
+		,"src/null_window.c"
+		,"src/null_joystick.c"
+		,"src/null_joystick.h"
+		,"src/win32_init.c"
+		,"src/win32_joystick.c"
+		,"src/win32_monitor.c"
+		,"src/win32_time.c"
+		,"src/win32_thread.c"
+		,"src/win32_window.c"
+		,"src/wgl_context.c"
+		,"src/egl_context.c"
+		,"src/osmesa_context.c"}
 
-
-		"src/win32_init.c",
-		"src/win32_joystick.c",
-		"src/win32_monitor.c",
-		"src/win32_time.c",
-		"src/win32_thread.c",
-		"src/win32_window.c",
-		"src/wgl_context.c",
-		"src/egl_context.c",
-		"src/osmesa_context.c"
-	}
+	defines 
+		{"_GLFW_WIN32"
+		,"_CRT_SECURE_NO_WARNINGS"}
 
 	filter "system:windows"
 		systemversion "latest"
 		staticruntime "On"
 
-	filter "configurations:Debug"
+	filter "configurations:debug"
 		runtime "Debug"
 		symbols "on"
 
-	filter "configurations:Release"
+	filter "configurations:release"
+		runtime "Release"
+		optimize "on"
+
+    filter "configurations:distribution"
 		runtime "Release"
 		optimize "on"
